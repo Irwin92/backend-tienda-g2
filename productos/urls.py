@@ -17,4 +17,8 @@ urlpatterns= [
                  name='resumen_producto'),
 
     path('api/perfil/',views.perfil,name='api_perfil'),
+
+    path('api/admin-info/',views.panel_admin_api,name='api_admin_info'),
+
+    path('api/sesion/',views.contador_session,name='contador_sesion'),
 ]
