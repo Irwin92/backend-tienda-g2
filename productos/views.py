@@ -10,10 +10,19 @@ from .serializers import ProductoSerializer, CategoriaSerializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import (
     api_view,authentication_classes,permission_classes,)
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,IsAdminUser
 from rest_framework.response import Response
 
-
+#------------------------------------------------------------------
+#Se crea endPoint reservado para administrador
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAdminUser])
+def panel_admin_api(request):
+    return Response({
+       "mensaje":"Acceso administrativo permitido"
+    })
+#------------------------------------------------------------------
 #Creamos un endPoint protegido
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
@@ -24,16 +33,6 @@ def perfil(request):
         "name":request.user.username,
         "email":request.user.email,
     })
-
-
-
-
-
-
-
-
-
-
 
 #------------------------------------------------------------------
 @api_view(['GET', 'POST'])
